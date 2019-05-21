@@ -1,0 +1,30 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 28
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11 -frtti -fexceptions -Wno-inconsistent-missing-override"
+                arguments '-DANDROID_STL=c++_static'
+                arguments '-Dprotobuf_BUILD_TESTS=off'
+                arguments '-Dprotobuf_BUILD_PROTOC_BINARIES=off'
+                arguments '-Dprotobuf_BUILD_SHARED_LIBS=off'
+//                arguments "-DCMAKE_VERBOSE_MAKEFILE:BOOL=ON"
+            }
+        }
+        ndk {
+//            abiFilters 'armeabi', 'x86'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "src/main/CMakeLists.txt"
+        }
+    }
+}
+
+dependencies {
+}
